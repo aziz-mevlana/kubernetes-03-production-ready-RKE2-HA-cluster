@@ -24,4 +24,4 @@ spec:
           value: "False"
         - name: DJANGO_ALLOWED_HOSTS
           # Şimdilik Ingress üzerinden gelecek istekler için Master NLB IP'ni veya domainini yazabilirsin
-          value: "10.53.0.93,127.0.0.1,localhost,43.229.92.13"
+          value: "*"
