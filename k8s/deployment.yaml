@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: django-app
-        image: <DOCKERHUB_KULLANICI_ADIN>/django-app:latest
+        image: azizmevlana/django-app:latest
         ports:
         - containerPort: 8000
         env:
