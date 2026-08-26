@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_IMAGE = "<DOCKERHUB_KULLANICI_ADIN>/django-app:latest"
+        DOCKER_IMAGE = "azizmevlana/django-app:latest"
         DOCKER_CREDENTIALS_ID = "dockerhub-cred"
         KUBECONFIG_CREDENTIALS_ID = "k8s-kubeconfig"
     }
