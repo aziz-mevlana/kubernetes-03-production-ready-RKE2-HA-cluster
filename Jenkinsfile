@@ -29,9 +29,9 @@ pipeline {
         stage('Deploy to RKE2') {
             steps {
                 withCredentials([file(credentialsId: "${KUBECONFIG_CREDENTIALS_ID}", variable: 'KUBECONFIG')]) {
-                    sh 'kubectl apply -f k8s/deployment.yaml'
-                    sh 'kubectl apply -f k8s/service.yaml'
-                    sh 'kubectl apply -f k8s/ingress.yaml'
+                    sh 'kubectl apply -f deployments/deployment.yaml'
+                    sh 'kubectl apply -f deployments/service.yaml'
+                    sh 'kubectl apply -f deployments/ingress.yaml'
                     sh 'kubectl rollout restart deployment/django-app'
                 }
             }
