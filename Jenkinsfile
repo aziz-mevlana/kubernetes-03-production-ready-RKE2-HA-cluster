@@ -4,15 +4,15 @@ pipeline {
     environment {
         DOCKER_IMAGE_REPO = "azizmevlana/django-app"
         DOCKER_CREDENTIALS_ID = "dockerhub-cred"
-        GIT_CREDENTIALS_ID = "github-cred"
-        CHART_VALUES = "deployments/django-chart/values.yaml"
+        KUBECONFIG_CREDENTIALS_ID = "k8s-kubeconfig"
+        ARGOCD_APP = "django-app-gitops"
     }
 
     stages {
         stage('Build & Push Docker Image') {
             steps {
                 script {
-                    // GitOps için benzersiz ve izlenebilir imaj etiketi kullan (Jenkins build numarası)
+                    // Benzersiz ve izlenebilir imaj etiketi (Jenkins build numarası)
                     def newTag = env.BUILD_NUMBER
                     dockerImage = docker.build("${DOCKER_IMAGE_REPO}")
 
@@ -22,25 +22,18 @@ pipeline {
                         dockerImage.push("latest")
                     }
 
-                    // Chart values içindeki imaj etiketini güncelle -> ArgoCD auto-sync'i tetikler
-                    sh "sed -i \"s|tag: \\\"latest\\\"|tag: \\\"${newTag}\\\"|\" ${CHART_VALUES}"
+                    // Yeni tag'i sonraki stage'de kullanabilmek için sakla
+                    env.NEW_TAG = newTag
                 }
             }
         }
 
-        stage('Trigger ArgoCD via Git') {
+        stage('Deploy via ArgoCD') {
             steps {
-                withCredentials([gitUsernamePassword(
-                    credentialsId: "${GIT_CREDENTIALS_ID}",
-                    usernameVariable: 'GIT_USER',
-                    passwordVariable: 'GIT_PASS'
-                )]) {
+                withCredentials([file(credentialsId: "${KUBECONFIG_CREDENTIALS_ID}", variable: 'KUBECONFIG')]) {
                     sh """
-                        git config user.email "jenkins@localhost"
-                        git config user.name "Jenkins CI"
-                        git add ${CHART_VALUES}
-                        git commit -m "chore: bump django-app image tag to ${env.BUILD_NUMBER}"
-                        git push origin HEAD
+                        kubectl -n argocd patch application ${ARGOCD_APP} --type=merge \
+                          -p '{"spec":{"source":{"helm":{"parameters":[{"name":"image.tag","value":"${env.NEW_TAG}"}]}}}}'
                     """
                 }
             }
