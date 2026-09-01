@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/aziz-mevlana/kubernetes-03-production-ready-RKE2-HA-cluster'
-    path: deployments                   
+    path: deployments/socker-chart                   
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
