@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: socket-gateway
+  namespace: socket-app
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 31400  # Küme dışından erişilecek TCP portu (NodePort/LoadBalancer aralığına uygun)
+        name: tcp-socket
+        protocol: TCP
+      hosts:
+        - "*"

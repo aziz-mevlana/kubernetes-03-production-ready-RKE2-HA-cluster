@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: socket-virtualservice
+  namespace: socket-app
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - socket-gateway
+  tcp:
+    - match:
+        - port: 31400
+      route:
+        - destination:
+            host: socket-service.socket-app.svc.cluster.local # Helm chart'taki service adı
+            port:
+              number: 8080                                   # Python uygulamasının dinlediği port
