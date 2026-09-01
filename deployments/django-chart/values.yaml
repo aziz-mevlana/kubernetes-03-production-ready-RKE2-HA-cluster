@@ -45,7 +45,7 @@ ingress:
 django:
   secretKey: ""
   debug: "False"
-  allowedHosts: application.43.229.92.223.nip.io
+  allowedHosts: "*"
 
 autoscaling:
   enabled: false
