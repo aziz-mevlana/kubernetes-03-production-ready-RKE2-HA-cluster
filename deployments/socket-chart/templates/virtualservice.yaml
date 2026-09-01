@@ -1,8 +1,9 @@
+{{- if .Values.istio.enabled }}
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: socket-virtualservice
-  namespace: socket-app
+  namespace: {{ .Release.Namespace }}
 spec:
   hosts:
     - "*"
@@ -13,6 +14,7 @@ spec:
         - port: 31400
       route:
         - destination:
-            host: socket-service.socket-app.svc.cluster.local # Helm chart'taki service adı
+            host: {{ include "socket-chart.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local
             port:
-              number: 8080                                   # Python uygulamasının dinlediği port
+              number: {{ .Values.service.port }}
+{{- end }}

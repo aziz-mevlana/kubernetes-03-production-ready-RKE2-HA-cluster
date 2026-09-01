@@ -8,8 +8,8 @@ metadata:
     "helm.sh/hook": test
 spec:
   containers:
-    - name: wget
+    - name: tcp-ping
       image: busybox
-      command: ['wget']
-      args: ['{{ include "socket-chart.fullname" . }}:{{ .Values.service.port }}']
+      command: ['sh', '-c']
+      args: ['echo PING | nc -w 5 {{ include "socket-chart.fullname" . }} {{ .Values.service.port }} | grep -q PONG']
   restartPolicy: Never

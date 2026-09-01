@@ -1,15 +1,17 @@
+{{- if .Values.istio.enabled }}
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
   name: socket-gateway
-  namespace: socket-app
+  namespace: {{ .Release.Namespace }}
 spec:
   selector:
     istio: ingressgateway
   servers:
     - port:
-        number: 31400  # Küme dışından erişilecek TCP portu (NodePort/LoadBalancer aralığına uygun)
+        number: 31400
         name: tcp-socket
         protocol: TCP
       hosts:
         - "*"
+{{- end }}

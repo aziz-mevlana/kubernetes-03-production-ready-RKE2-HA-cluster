@@ -1,0 +1,7 @@
+# Copyright (c) 2020 The Helm Authors.
+# Licensed under the Apache License, Version 2.0.
+
+.gitignore
+LICENSE
+README.md
+*.tgz
