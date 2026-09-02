@@ -3,7 +3,7 @@ entries:
   django-chart:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2026-09-02T19:09:36.914559+03:00"
+    created: "2026-09-02T19:14:44.816693+03:00"
     description: Django web application Helm chart deployed via ArgoCD
     digest: f2fff353f8980394bc334be9e3a2533d531c393316606ff4f605bec196016a59
     name: django-chart
@@ -14,7 +14,7 @@ entries:
   gateway:
   - apiVersion: v2
     appVersion: 1.30.4
-    created: "2026-09-02T19:09:36.915418+03:00"
+    created: "2026-09-02T19:14:44.817124+03:00"
     description: Helm chart for deploying Istio gateways
     digest: b662db852bfec2994725eb478c2e89fe6e73729aeb7ab90352d8042928fa20ce
     icon: https://istio.io/latest/favicons/android-192x192.png
@@ -31,7 +31,7 @@ entries:
   istiod:
   - apiVersion: v2
     appVersion: 1.30.4
-    created: "2026-09-02T19:09:36.917014+03:00"
+    created: "2026-09-02T19:14:44.819234+03:00"
     description: Helm chart for istio control plane
     digest: 66ad8344e2ef16745aa425dc6609570b42536ecdf1ab5ca04a90abf1bc577344
     icon: https://istio.io/latest/favicons/android-192x192.png
@@ -47,8 +47,18 @@ entries:
     version: 1.30.4
   socket-chart:
   - apiVersion: v2
+    appVersion: 1.2.0
+    created: "2026-09-02T19:14:44.81987+03:00"
+    description: Long-lived TCP socket application Helm chart
+    digest: cc53c7555ad85cb54f0df1bd95ae491d07a7f2d446a2a6c1fc246f95c5db39f9
+    name: socket-chart
+    type: application
+    urls:
+    - https://aziz-mevlana.github.io/kubernetes-03-production-ready-RKE2-HA-cluster/socket-chart-1.2.0.tgz
+    version: 1.2.0
+  - apiVersion: v2
     appVersion: 1.1.0
-    created: "2026-09-02T19:09:36.917481+03:00"
+    created: "2026-09-02T19:14:44.819588+03:00"
     description: Long-lived TCP socket application Helm chart
     digest: 70b0da41dd5e8e096624633469dbc513b37e230a7b934ed3be57ddc9d557b2ef
     name: socket-chart
@@ -56,4 +66,4 @@ entries:
     urls:
     - https://aziz-mevlana.github.io/kubernetes-03-production-ready-RKE2-HA-cluster/socket-chart-1.1.0.tgz
     version: 1.1.0
-generated: "2026-09-02T19:09:36.913664+03:00"
+generated: "2026-09-02T19:14:44.816425+03:00"
