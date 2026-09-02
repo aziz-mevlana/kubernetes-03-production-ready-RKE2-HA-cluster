@@ -6,7 +6,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   selector:
-    istio: ingressgateway
+    istio: gateway
   servers:
     - port:
         number: 31400
